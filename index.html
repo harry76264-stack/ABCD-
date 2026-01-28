@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>System Breach</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: red;
+      font-family: 'Courier New', Courier, monospace;
+      height: 100%;
+      overflow: hidden;
+      user-select: none;
+      cursor: none;
+    }
+
+    h1 {
+      font-size: 50px;
+      animation: blink 0.8s infinite;
+    }
+
+    p {
+      font-size: 24px;
+      margin-top: 30px;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    #overlay {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+  <script>
+    function fakeVirus() {
+      document.addEventListener("contextmenu", e => e.preventDefault());
+      document.addEventListener("keydown", e => e.preventDefault());
+
+      let percent = 0;
+      const p = document.createElement('p');
+      document.getElementById('overlay').appendChild(p);
+
+      const interval = setInterval(() => {
+        percent += Math.floor(Math.random() * 5) + 1;
+        if (percent >= 100) {
+          percent = 100;
+          clearInterval(interval);
+          setTimeout(() => {
+            alert("💀 All files encrypted. System locked.");
+            alert("💸 System ne tumhari crush wali folder detect kar li hai... naam: 'Meri Jaan 😍'");
+            alert("🤣 Tumhara system nahi... tumhara dil hack kiya hai ❤️‍🔥!");
+          }, 1000);
+        }
+        p.textContent = `Encrypting files: ${percent}%`;
+      }, 200);
+    }
+
+    function moveCursor() {
+      const fakeCursor = document.createElement("div");
+      fakeCursor.style.width = "10px";
+      fakeCursor.style.height = "10px";
+      fakeCursor.style.background = "red";
+      fakeCursor.style.position = "absolute";
+      fakeCursor.style.zIndex = 9999;
+      fakeCursor.style.borderRadius = "50%";
+      document.body.appendChild(fakeCursor);
+
+      setInterval(() => {
+        fakeCursor.style.left = Math.random() * window.innerWidth + "px";
+        fakeCursor.style.top = Math.random() * window.innerHeight + "px";
+      }, 50);
+    }
+
+    window.onload = () => {
+      fakeVirus();
+      moveCursor();
+
+      document.body.addEventListener("click", () => {
+        const sound = document.getElementById("alertSound");
+        sound.volume = 1.0;
+        sound.play().catch(e => console.log("Playback failed:", e));
+      });
+    };
+  </script>
+</head>
+<body>
+  <audio id="alertSound" loop>
+    <source src="virus_sound.mp3" type="audio/mp3">
+  </audio>
+
+  <div id="overlay">
+    <h1>VIRUS DETECTED</h1>
+    <p>Your files are being encrypted...</p>
+    <p><small>(System infected by: H@rr¥-666)</small></p>
+  </div>
+</body>
+</html>
